@@ -11,7 +11,7 @@
 - [Archivo Principal](#archivo-principal)
 
 ---
-
+# Clean Code
 ## ParticipantesController
 
 ### 1. Nombres Descriptivos
@@ -154,6 +154,7 @@ if __name__ == "__main__":
     # Ejecutar la aplicación en modo de depuración
     app.run(debug=True)
 ```
+# SOLID
 
 ## Principios SOLID en ParticipantesController
 
