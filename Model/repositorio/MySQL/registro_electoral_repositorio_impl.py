@@ -1,5 +1,6 @@
 #!/usr/bin/python
 #-*- coding: utf-8 -*-
+from sqlalchemy.exc import NoResultFound, SQLAlchemyError
 from Model.extensions import db
 from Model.models.registro_electoral import RegistroElectoralModelo
 
@@ -24,5 +25,18 @@ class registro_electoral_repositorio_impl:
         except:
             db.session.rollback()
             raise
+        finally:
+            db.session.close()
+
+    @staticmethod
+    def agregar_elector_a_registro(registro_id, elector):
+        try:
+            entrada = db.session.query(RegistroElectoralModelo).filter_by(id = registro_id).one()
+            entrada.lista_electores += '|' + elector  #elector.nombre / formato de ingreso de electores al registro?
+            db.session.commit()
+        except NoResultFound:
+            print(f"No se encontró una entrada con la id {registro_id}\n")
+        except SQLAlchemyError as e:
+            print(f"Hubo un error al consultar la base de datos: {e}")
         finally:
             db.session.close()
