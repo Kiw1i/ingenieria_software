@@ -13,40 +13,58 @@ class ParticipantesController:
         """
         Obtener todos los participantes.
         """
-        participantes = self.servicio.obtener_todos()
-        return jsonify(participantes)
+        try:
+            participantes = self.servicio.obtener_todos()
+            return jsonify(participantes)
+        except Exception as e:
+            return jsonify({"error": "Error al obtener participantes: " + str(e)}), 500
 
     @participantes_bp.route('/participantes', methods=['POST'])
     def crear_participante(self):
-        """
-        Crear un nuevo participante.
-        """
-        data = request.json
-        nuevo_participante = self.servicio.crear(data)
-        return jsonify(nuevo_participante), 201
+        try:
+            data = request.json
+            # Validación de datos
+            if not data.get('nombre') or not data.get('edad'):
+                return jsonify({"error": "Faltan campos obligatorios: nombre y edad"}), 400
+            if not isinstance(data.get('edad'), int):
+                return jsonify({"error": "El campo edad debe ser un número entero"}), 400
 
+            nuevo_participante = self.servicio.crear(data)
+            return jsonify(nuevo_participante), 201
+        except Exception as e:
+            return jsonify({"error": "Error al crear participante: " + str(e)}), 400
+
+            
     @participantes_bp.route('/participantes/<int:id>', methods=['PUT'])
     def actualizar_participante(self, id):
         """
         Actualizar un participante existente.
         """
-        data = request.json
-        participante_actualizado = self.servicio.actualizar(id, data)
-        return jsonify(participante_actualizado)
+        try:
+            data = request.json
+            participante_actualizado = self.servicio.actualizar(id, data)
+            return jsonify(participante_actualizado)
+        except Exception as e:
+            return jsonify({"error": "Error al actualizar participante: " + str(e)}), 400
 
     @participantes_bp.route('/participantes/<int:id>', methods=['DELETE'])
     def eliminar_participante(self, id):
         """
         Eliminar un participante existente.
         """
-        self.servicio.eliminar(id)
-        return '', 204
-    
+        try:
+            self.servicio.eliminar(id)
+            return '', 204
+        except Exception as e:
+            return jsonify({"error": "Error al eliminar participante: " + str(e)}), 400
+
     @participantes_bp.route('/participantes/<int:id>/detalle', methods=['GET'])
     def obtener_detalle_participante(self, id):
-        detalle = self.servicio.obtener_detalle(id)
-        return jsonify(detalle)
-    
+        try:
+            detalle = self.servicio.obtener_detalle(id)
+            return jsonify(detalle)
+        except Exception as e:
+            return jsonify({"error": "Error al obtener detalle del participante: " + str(e)}), 500
+
 # Uso
-servicio = ParticipantesServicio()
-controller = ParticipantesController(servicio)
+controller = ParticipantesController()

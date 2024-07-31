@@ -4,6 +4,10 @@
 :root {
     --max-width-container: 800px;
     --padding-container: 20px;
+    --gap-list-items: 10px;
+    --border-radius: 5px;
+    --background-color-item: var(--white-color);
+    --border-color-item: var(--border-color);
 }
 
 /* Contenedor principal para los participantes */
@@ -11,6 +15,9 @@
     max-width: var(--max-width-container);
     margin: auto;
     padding: var(--padding-container);
+    background-color: var(--background-color);
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Estilo para los elementos de la lista de participantes */
@@ -18,4 +25,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: var(--padding-container);
+    margin-bottom: var(--gap-list-items);
+    background-color: var(--background-color-item);
+    border: 1px solid var(--border-color-item);
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
