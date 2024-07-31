@@ -2,7 +2,7 @@
 #-*- coding: utf-8 -*-
 from abc import ABC, abstractmethod
 
-class IClases(ABC):
+class ICandidato(ABC):
     @abstractmethod
     def modificar_propuesta(self, propuesta:str)->None:
         pass 
