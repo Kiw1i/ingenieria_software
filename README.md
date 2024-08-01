@@ -4,7 +4,7 @@
 - [Proposito del Proyecto](#proposito-del-proyecto)
 - [Funcionalidades](#funcionalidades)
 - [Modelo de dominio](#modelo-de-dominio)
-- [Arquitectura y Patronesl](#arquitectura-y-patrones)
+- [Arquitectura y Patrones](#arquitectura-y-patrones)
 - [Practicas de codificación limpia aplicadas](#practicas-de-codificacion-limpia-aplicadas)
 - [Estilos de programación aplicados](#estilos-de-programacion-aplicados)
 - [Principios SOLID aplicados](#principios-solid-aplicados)
