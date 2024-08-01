@@ -1,7 +1,19 @@
-#!/usr/bin/python
-#-*- coding: utf-8 -*-
+from flask import Blueprint, render_template
 
-from servicios.Iproceso_electoral import Iproceso_electoral
+proceso_electoral_bp = Blueprint('proceso_electoral', __name__)
 
-class proceso_electoral_controller(Iproceso_electoral):
-    pass
+@proceso_electoral_bp.route('/administrador/eleccion/')
+def administrador_eleccion():
+    return render_template('administrador_eleccion.html')
+
+@proceso_electoral_bp.route('/eleccion/')
+def eleccion():
+    return render_template('eleccion.html')
+
+@proceso_electoral_bp.route('/registro/electoral/')
+def registro_electoral():
+    return render_template('registro_electoral.html')
+
+@proceso_electoral_bp.route('/resultados/')
+def resultados():
+    return render_template('resultados.html')

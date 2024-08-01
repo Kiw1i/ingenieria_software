@@ -1,0 +1,29 @@
+<!-- Archivo: presentacion/vista/participantes/index.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Participantes</title>
+    <!-- Vincular hojas de estilo CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos_generales.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/participantes.css') }}">
+</head>
+<body>
+    <div id="participantes-container">
+        <h1>Lista de Participantes</h1>
+        <!-- Lista para mostrar los participantes -->
+        <ul id="lista-participantes"></ul>
+
+        <!-- Formulario para agregar un nuevo participante -->
+        <form id="form-participante">
+            <input type="text" id="nombre" placeholder="Nombre del participante" required>
+            <button type="submit">Agregar Participante</button>
+        </form>
+    </div>
+
+    <!-- Vincular archivos JavaScript -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/participantes.js') }}"></script>
+</body>
+</html>
