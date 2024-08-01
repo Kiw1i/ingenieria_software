@@ -5,7 +5,7 @@
 - [Funcionalidades](#funcionalidades)
 - [Modelo de dominio](#modelo-de-dominio)
 - [Arquitectura y patrones](#arquitectura-y-patrones)
-- [Practicas de codificación limpia aplicadas](#prácticas-de-codificación-limpia-aplicadas)
+- [Prácticas de codificación limpia aplicadas](#prácticas-de-codificación-limpia-aplicadas)
 - [Estilos de programación aplicados](#estilos-de-programación-aplicados)
 - [Principios SOLID aplicados](#principios-solid-aplicados)
 
@@ -85,7 +85,7 @@ El proyecto sigue una arquitectura basada en capas, con una clara separación en
 - Capa de Aplicación/Lógica de Negocio: Esta capa gestiona las reglas del negocio y coordina las interacciones entre la presentación y el acceso a datos. Aquí se incluyen las funciones y servicios que implementan la lógica del proceso electoral.
 - Capa de Datos: Utiliza SQLAlchemy como ORM para gestionar la persistencia de datos en la base de datos, proporcionando una abstracción para el acceso a datos.
 
-## Practicas de codificación limpia aplicadas
+## Prácticas de codificación limpia aplicadas
 ### Nombres de variables, funciones y clases
 El proyecto hace uso de prácticas de codificación legible para variables, funciones y métodos según el estándar del lenguaje Python, que indica que se debe usar el *snake_case*. Del mismo modo, las clases siguen la convención *CamelCase*.
 
