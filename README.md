@@ -15,33 +15,83 @@
 ## Proposito del Proyecto
 El propósito de este proyecto es desarrollar un sistema de elecciones en línea que permita la gestión completa de un proceso electoral. Este sistema ofrece una plataforma segura y eficiente para registrar candidatos, electores y administrar la votación.
 
-
 ## Funcionalidades
-#### Diagramas de caso de uso
+#### 1. Diagramas de caso de uso
 
 ![diagrama de casos de uso](Imagenes/diagrama_de_casos_de_uso.png)
 
-#### Funcionalidades de Alto Nivel:
+#### 2. Funcionalidades de Alto Nivel:
 - Registro de Votantes: Permite a los usuarios registrarse en el sistema para poder votar.
 - Gestión de Candidatos: Funcionalidad para registrar y gestionar candidatos en las elecciones.
 - Votación en Línea: Los votantes pueden emitir su voto de forma segura.
 - Resultados Electorales: Visualización de resultados en tiempo real una vez concluido el proceso de votación.
-#### Prototipo (o GUI):
-![login](Imagenes/Login.png)
-![registrar elector](Imagenes/Registrar_Elector.png)
-![regitrar candidato](Imagenes/Registro_Candidato.png)
-![registro elecciones](Imagenes/Registro_de_Elecciones.png)
-![diagrama](Imagenes/diagrama_de_clases.png)
-![diagrama](Imagenes/diagrama_de_componentes.png)
-![diagrama](Imagenes/diagrama_de_despliegue.png)
-![diagrama](Imagenes/diagrama_de_paquetes.png)
-![general](Imagenes/vista_arquitectura.png)
+#### 3. Prototipo (o GUI):
 
-## Modelo del dominio
-### Diagrama de clases y modulos
+##### Login:
+![login](Imagenes/Login.png)
+##### Menu:
+![login](Imagenes/Menu.png)
+##### Registro de Elector:
+![registrar elector](Imagenes/Registrar_Elector.png)
+##### Registro de Candidato:
+![regitrar candidato](Imagenes/Registro_Candidato.png)
+##### Registro de Elecciones:
+![registro elecciones](Imagenes/Registro_Elecciones.png)
+
+
+## Modelo de dominio
+### 1. Diagrama de clases y modulos
+
+#### Diagrama de clases:
+![diagrama](Imagenes/diagrama_clases.png)
+#### Diagrama de componentes:
+![diagrama](Imagenes/diagrama_componentes.png)
+#### Diagrama de despligue:
+![diagrama](Imagenes/diagrama_despliegue.png)
+#### Diagrama de paquetes:
+![diagrama](Imagenes/diagrama_paquetes.png)
+
+### 2. Módulos del Sistema
+1. Módulo de Presentación
+    - Maneja la interacción con el usuario.
+    - Incluye vistas HTML y controladores para procesar las solicitudes.
+  
+2. Módulo de Proceso Electoral
+    - Contiene la lógica para gestionar elecciones, incluyendo creación y conteo de votos.
+    - Se ocupa de la ejecución del proceso electoral completo.
+  
+3. Módulo de Participantes
+    - Gestiona la información sobre candidatos y electores.
+    - Incluye operaciones CRUD y lógica de negocio relacionada con los participantes.
+  
+4. Módulo de Voto
+    - Responsable de la creación, validación y almacenamiento de votos.
+    - Implementa lógica para garantizar la integridad del proceso de votación.
+  
+5. Módulo de Resultados
+    - Calcula y presenta los resultados de las elecciones.
+    - Proporciona análisis y estadísticas sobre las elecciones.
+  
+6. Módulo de Registro Electoral
+    - Gestiona el registro de electores y la validación de los derechos de voto.
+    - Asegura que solo los usuarios autorizados puedan participar en las elecciones.
+
+
 
 ## Arquitectura y Patrones
-###
+### 1. Arquitectura
+#### Vista general de la arquitectura:
+![general](Imagenes/vista_arquitectura.jpeg)
+
+El proyecto sigue una arquitectura basada en capas, con una clara separación entre la lógica de negocio, la presentación y el acceso a datos:
+- Capa de Presentación: Utiliza Flask para manejar las rutas y vistas. Los controladores gestionan las solicitudes HTTP y renderizan las plantillas HTML para la interacción con el usuario.
+- Capa de Aplicación/Lógica de Negocio: Esta capa gestiona las reglas del negocio y coordina las interacciones entre la presentación y el acceso a datos. Aquí se incluyen las funciones y servicios que implementan la lógica del proceso electoral.
+- Capa de Datos: Utiliza SQLAlchemy como ORM para gestionar la persistencia de datos en la base de datos, proporcionando una abstracción para el acceso a datos.
+  
+### Patrones Utilizados
+- Modelo-Vista-Controlador (MVC): El proyecto sigue el patrón MVC, donde los modelos representan la estructura de datos, las vistas son las interfaces de usuario y los controladores manejan la interacción entre modelos y vistas.
+- Repositorio: Se utiliza para la abstracción del acceso a datos, permitiendo a la capa de lógica de negocio interactuar con la base de datos a través de una interfaz coherente.
+
 
 
 ## Error/Exception Handling (constructive)
