@@ -18,6 +18,9 @@ El propósito de este proyecto es desarrollar un sistema de elecciones en línea
 
 ## Funcionalidades
 #### Diagramas de caso de uso
+
+![diagrama de casos de uso](Imagenes/diagramadecasosdeuso.png)
+
 #### Funcionalidades de Alto Nivel:
 - Registro de Votantes: Permite a los usuarios registrarse en el sistema para poder votar.
 - Gestión de Candidatos: Funcionalidad para registrar y gestionar candidatos en las elecciones.
