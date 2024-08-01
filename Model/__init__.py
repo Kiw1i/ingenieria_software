@@ -48,7 +48,8 @@ def create_app():
 
     @app.route('/eleccion')
     def eleccion():
-        return render_template('eleccion.html')
+        elecciones = EleccionModelo.query.all()
+        return render_template('eleccion.html', elecciones=elecciones)
 
     @app.route('/registrar_candidato_view')
     def registrar_candidato_view():

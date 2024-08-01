@@ -6,7 +6,16 @@
 <section>
     <h2>Participa en la Elección</h2>
     <p>Aquí puedes ver las elecciones disponibles y votar.</p>
-    <!-- Agregar más contenido o funcionalidades aquí -->
-    <a href="{{ url_for('index') }}">Inicio</a></li>
+    <ul>
+        {% for eleccion in elecciones %}
+            <li>
+                <strong>Tipo de Elección:</strong> {{ eleccion.tipo_eleccion }} <br>
+                <strong>Fecha de Inicio:</strong> {{ eleccion.fecha_inicio.strftime('%Y-%m-%d %H:%M') }} <br>
+                <strong>Fecha de Cierre:</strong> {{ eleccion.fecha_cierre.strftime('%Y-%m-%d %H:%M') }} <br>
+                <strong>Candidatos:</strong> {{ eleccion.lista_candidatos.replace('|', ', ') }} <br>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('index') }}">Inicio</a>
 </section>
 {% endblock %}
