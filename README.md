@@ -16,6 +16,24 @@
 El propósito de este proyecto es desarrollar un sistema de elecciones en línea que permita la gestión completa de un proceso electoral. Este sistema ofrece una plataforma segura y eficiente para registrar candidatos, electores y administrar la votación.
 
 
+## Funcionalidades
+#### Diagramas de caso de uso
+#### Funcionalidades de Alto Nivel:
+- Registro de Votantes: Permite a los usuarios registrarse en el sistema para poder votar.
+- Gestión de Candidatos: Funcionalidad para registrar y gestionar candidatos en las elecciones.
+- Votación en Línea: Los votantes pueden emitir su voto de forma segura.
+- Resultados Electorales: Visualización de resultados en tiempo real una vez concluido el proceso de votación.
+#### Prototipo (o GUI):
+![login](Imagenes/Login.png)
+
+
+## Modelo del dominio
+### Diagrama de clases y modulos
+
+## Arquitectura y Patrones
+###
+
+
 ## Error/Exception Handling (constructive)
 Este estilo se aplica en todos los métodos del repositorio para manejar posibles errores durante las operaciones con la base de datos. Si ocurre una excepción, la operación se revierte para mantener la integridad de los datos. 
 ## Cookbook
