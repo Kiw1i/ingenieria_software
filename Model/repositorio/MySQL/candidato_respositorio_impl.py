@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #-*- coding: utf-8 -*-
 from Model.extensions import db
-from Model.models import Candidato
+from Model.models import candidato
 
 class candidato_respositorio_impl:
     def agregar_candidato(self, candidato):
@@ -24,14 +24,14 @@ class candidato_respositorio_impl:
 
     def obtener_candidato_por_id(self, id):
         try:
-            candidato = Candidato.query.get(id)
+            candidato = candidato.query.get(id)
             return candidato
         except Exception:
             return None
     
     def actualizar_candidato(self, id, nueva_candidatura, nueva_propuesta):
         try:
-            candidato = Candidato.query.get(id)
+            candidato = candidato.query.get(id)
             if candidato:
                 candidato.candidatura = nueva_candidatura
                 candidato.propuesta = nueva_propuesta

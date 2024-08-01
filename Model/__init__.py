@@ -3,9 +3,9 @@ from Model.extensions import db
 from flask_migrate import Migrate
 from datetime import datetime
 from Model.repositorio.MySQL.elector_repositorio_impl import elector_repositorio_impl
-from Model.models.Elector import Elector as ElectorClass
+from Model.models.elector import Elector as ElectorClass
 from Model.repositorio.MySQL.candidato_respositorio_impl import candidato_respositorio_impl
-from Model.models.Candidato import Candidato as CandidatoClass
+from Model.models.candidato import Candidato as CandidatoClass
 from Model.repositorio.MySQL.registro_electoral_repositorio_impl import registro_electoral_repositorio_impl
 from Model.models.registro_electoral import RegistroElectoralModelo 
 from Model.models.eleccion import EleccionModelo
@@ -20,7 +20,7 @@ def create_app():
     print(migrate)
 
     with app.app_context():
-        from Model.models import Candidato, Elector, eleccion, registro_electoral, administrador_eleccion
+        from Model.models import candidato, elector, eleccion, registro_electoral, administrador_eleccion
         db.create_all()
 
     # Aquí se definen las rutas

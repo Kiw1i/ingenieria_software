@@ -1,8 +1,8 @@
 #!/usr/bin/python
 #-*- coding: utf-8 -*-
 from Model.extensions import db
-from Model.models import Elector
-from Model.models.Elector import Elector as ElectorClass
+from Model.models import elector
+from Model.models.elector import Elector as ElectorClass
 
 class elector_repositorio_impl:
     def agregar_elector(self, elector):
@@ -32,7 +32,7 @@ class elector_repositorio_impl:
     
     def actualizar_elector(self, id, nuevo_correo, nueva_contrasena, nuevo_nombre, nuevo_apellido, nuevo_estado_voto):
         try:
-            elector = Elector.query.get(id)
+            elector = elector.query.get(id)
             if elector:
                 elector.correo = nuevo_correo
                 elector.contrasena = nueva_contrasena
