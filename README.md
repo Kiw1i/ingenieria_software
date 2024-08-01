@@ -8,7 +8,6 @@
 - [Practicas de codificación limpia aplicadas](#prácticas-de-codificación-limpia-aplicadas)
 - [Estilos de programación aplicados](#estilos-de-programación-aplicados)
 - [Principios SOLID aplicados](#principios-solid-aplicados)
-- [Conceptos DDD aplicados](#conceptos-ddd-aplicados)
 
 ---
 # Sistema de elecciones en linea
