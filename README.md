@@ -222,3 +222,123 @@ class Elector(db.Model):
     def __repr__(self):
         return f'<Elector {self.nombre} {self.apellido}>'
 ```
+
+## Principios SOLID aplicados
+### 1. Principio de Responsabilidad Única (SRP)
+El ParticipantesController tiene una única responsabilidad: manejar las solicitudes relacionadas con los participantes. No mezcla lógica de negocio ni de acceso a datos.
+
+**Ejemplo:**
+```python
+class ParticipantesController:
+    def __init__(self):
+        self.servicio = ParticipantesServicio()
+
+    @participantes_bp.route('/participantes', methods=['GET'])
+    def obtener_participantes(self):
+        participantes = self.servicio.obtener_todos()
+        return jsonify(participantes)
+
+    @participantes_bp.route('/participantes', methods=['POST'])
+    def crear_participante(self):
+        data = request.json
+        nuevo_participante = self.servicio.crear(data)
+        return jsonify(nuevo_participante), 201
+
+    @participantes_bp.route('/participantes/<int:id>', methods=['PUT'])
+    def actualizar_participante(self, id):
+        data = request.json
+        participante_actualizado = self.servicio.actualizar(id, data)
+        return jsonify(participante_actualizado)
+
+    @participantes_bp.route('/participantes/<int:id>', methods=['DELETE'])
+    def eliminar_participante(self, id):
+        self.servicio.eliminar(id)
+        return '', 204
+```
+
+Asimismo, la clase AdministradorEleccion se encarga únicamente de registrar a un administrador, cumpliendo con el principio.
+
+```python
+class AdministradorEleccion:
+    def __init__(self):
+        self.nombre = None
+        self.id = None
+        self.password = None
+
+    def registrar_admin(self, nombre: str, password: str, id: int) -> None:
+        self.nombre = nombre
+        self.password = password
+        self.id = id
+```
+
+### 3. Principio de Abierto/Cerrado (OCP)
+El ParticipantesController está abierto para la extensión (puedes añadir nuevos endpoints) pero cerrado para la modificación (no necesitas modificar el código existente para añadir nuevas funcionalidades).
+
+**Ejemplo:**
+```python
+class ParticipantesController:
+    # Métodos existentes...
+
+    @participantes_bp.route('/participantes/<int:id>/detalle', methods=['GET'])
+    def obtener_detalle_participante(self, id):
+        detalle = self.servicio.obtener_detalle(id)
+        return jsonify(detalle)
+```
+
+El ProcesoElectoralController está abierto para la extensión pero cerrado para la modificación.
+
+**Ejemplo:**
+```python
+class ProcesoElectoralController:
+    # Métodos existentes...
+
+    @proceso_electoral_bp.route('/procesos-electorales/<int:id>/detalle', methods=['GET'])
+    def obtener_detalle_proceso(self, id):
+        detalle = self.servicio.obtener_detalle(id)
+        return jsonify(detalle)
+```
+
+### 3. Principio de Segregación de Interfaces (ISP):
+La interfaz IResultados está diseñada para proporcionar métodos específicos relacionados con la gestión de resultados, cumpliendo con el principio de Segregación de Interfaces (ISP) al asegurar que las implementaciones solo dependan de métodos que realmente utilizan `from abc import ABC`, que son `@abstractmethod`.
+
+```python
+class IResultados(ABC):
+    @abstractmethod
+    def agregar_voto(self, candidato: str) -> None:
+        pass
+
+    @abstractmethod
+    def calcular_porcentajes(self) -> None:
+        pass
+
+    @abstractmethod
+    def mostrar_resultados(self) -> dict:
+        pass
+```
+
+### 2. Principio de Inversión de Dependencias (DIP)
+El controlador depende de una abstracción (ParticipantesServicio) en lugar de una implementación concreta. Esto permite cambiar la implementación del servicio sin modificar el controlador.
+
+**Ejemplo:**
+```python
+class ParticipantesController:
+    def __init__(self, servicio):
+        self.servicio = servicio
+
+# Uso
+servicio = ParticipantesServicio()
+controller = ParticipantesController(servicio)
+```
+
+El controlador depende de una abstracción (ProcesoElectoralServicio) en lugar de una implementación concreta.
+
+**Ejemplo:**
+```python
+class ProcesoElectoralController:
+    def __init__(self, servicio):
+        self.servicio = servicio
+
+# Uso
+servicio = ProcesoElectoralServicio()
+controller = ProcesoElectoralController(servicio)
+```
