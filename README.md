@@ -1,4 +1,21 @@
-# Sistema de elecciones online 
+# Documentación del Proyecto
+
+## Índice
+- [Proposito del Proyecto](#proposito-del-proyecto)
+- [Funcionalidades](#funcionalidades)
+- [Modelo de dominio](#modelo-de-dominio)
+- [Arquitectura y Patronesl](#arquitectura-y-patrones)
+- [Practicas de codificación limpia aplicadas](#practicas-de-codificacion-limpia-aplicadas)
+- [Estilos de programación aplicados](#estilos-de-programacion-aplicados)
+- [Principios SOLID aplicados](#principios-solid-aplicados)
+- [Conceptos DDD aplicados](#conceptos-ddd-aplicados)
+
+---
+# Sistema de elecciones en linea
+## Proposito del Proyecto
+El propósito de este proyecto es desarrollar un sistema de elecciones en línea que permita la gestión completa de un proceso electoral. Este sistema ofrece una plataforma segura y eficiente para registrar candidatos, electores y administrar la votación.
+
+
 ## Error/Exception Handling (constructive)
 Este estilo se aplica en todos los métodos del repositorio para manejar posibles errores durante las operaciones con la base de datos. Si ocurre una excepción, la operación se revierte para mantener la integridad de los datos. 
 ## Cookbook
