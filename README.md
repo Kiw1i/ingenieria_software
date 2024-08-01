@@ -19,7 +19,7 @@ El propósito de este proyecto es desarrollar un sistema de elecciones en línea
 ## Funcionalidades
 #### Diagramas de caso de uso
 
-![diagrama de casos de uso](Imagenes/diagramadecasosdeuso.png)
+![diagrama de casos de uso](Imagenes/diagrama_de_casos_de_uso.png)
 
 #### Funcionalidades de Alto Nivel:
 - Registro de Votantes: Permite a los usuarios registrarse en el sistema para poder votar.
@@ -28,7 +28,14 @@ El propósito de este proyecto es desarrollar un sistema de elecciones en línea
 - Resultados Electorales: Visualización de resultados en tiempo real una vez concluido el proceso de votación.
 #### Prototipo (o GUI):
 ![login](Imagenes/Login.png)
-
+![registrar elector](Imagenes/Registrar_Elector.png)
+![regitrar candidato](Imagenes/Registro_Candidato.png)
+![registro elecciones](Imagenes/Registro_de_Elecciones.png)
+![diagrama](Imagenes/diagrama_de_clases.png)
+![diagrama](Imagenes/diagrama_de_componentes.png)
+![diagrama](Imagenes/diagrama_de_despliegue.png)
+![diagrama](Imagenes/diagrama_de_paquetes.png)
+![general](Imagenes/vista_arquitectura.png)
 
 ## Modelo del dominio
 ### Diagrama de clases y modulos
