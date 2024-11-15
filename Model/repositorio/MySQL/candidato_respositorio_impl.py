@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #-*- coding: utf-8 -*-
 from Model.extensions import db
-from Model.models import candidato
+from Model.models import Candidato
 
 class candidato_respositorio_impl:
     def agregar_candidato(self, candidato):
