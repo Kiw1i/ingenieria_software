@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+<section>
+    <h2>Bienvenido al Sistema Electoral</h2>
+    <p>Inicia sesión para empezar.</p>
+    <div>
+        <form action="{{ url_for('login') }}" method="post">
+            <div>
+                <label for="correo">Correo:</label>
+                <input type="text" id="correo" name="correo" required>
+            </div>
+            <div>
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div>
+                <button type="submit" class="btn">Iniciar Sesión</button>
+            </div>
+        </form>
+    </div>
+    <a href="{{ url_for('registrar_elector_view') }}">Registrar Elector</a>
+</section>
+{% endblock %}

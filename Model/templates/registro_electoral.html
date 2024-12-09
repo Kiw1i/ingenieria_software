@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Registro de Elecciones{% endblock %}
+
+{% block content %}
+<section>
+    <h2>Registro de Elecciones</h2>
+    <p>Aquí puedes registrar una nueva elección y seleccionar los candidatos.</p>
+
+    <form method="POST" action="{{ url_for('registrar_eleccion') }}">
+        <div>
+            <label for="tipo_eleccion">Tipo de Elección:</label>
+            <input type="text" id="tipo_eleccion" name="tipo_eleccion" required>
+        </div>
+        <div>
+            <label for="fecha_inicio">Fecha de Inicio:</label>
+            <input type="datetime-local" id="fecha_inicio" name="fecha_inicio" required>
+        </div>
+        <div>
+            <label for="fecha_fin">Fecha de Cierre:</label>
+            <input type="datetime-local" id="fecha_fin" name="fecha_fin" required>
+        </div>
+        <div>
+            <h2>Candidatos:</h2>
+            <div class="candidatos-list">
+                {% for candidato in candidatos %}
+                    <div class="candidato">
+                        <input type="checkbox" id="candidato_{{ candidato.id }}" name="candidatos" value="{{ candidato.id }}">
+                        <label for="candidato_{{ candidato.id }}">{{ candidato.nombre }} {{ candidato.apellido }} - {{ candidato.partido }}</label>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <button type="submit" class="btn">Registrar Elección</button>
+    </form>
+
+    <a href="{{ url_for('index') }}" class="btn-secondary">Volver al Inicio</a>
+</section>
+{% endblock %}
