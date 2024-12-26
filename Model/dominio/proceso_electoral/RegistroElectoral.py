@@ -12,6 +12,7 @@ class RegistroElectoral(IRegistroElectoralRepositorio):
         self.lista_electores = []  
         self.lista_candidatos = []  
         self.lista_partidos = []  
+        return 
     
     def agregar_elector(self, elector) -> None:
         """Agrega un elector a la lista de electores."""
@@ -52,3 +53,12 @@ class RegistroElectoral(IRegistroElectoralRepositorio):
         registro_modelo = RegistroElectoralModelo.query.filter_by(id=registro_id).first()
         if registro_modelo:
             registro_electoral_repositorio_impl.eliminar_registro(registro_modelo)
+
+    def obtener_registro(self, registro_id):
+        registro_modelo = RegistroElectoralModelo.query.filter_by(id=registro_id).first()
+        if registro_modelo:
+            self.lista_electores = registro_modelo.lista_electores.split("|")
+            self.lista_candidatos = registro_modelo.lista_candidatos.split("|")
+            self.lista_partidos = registro_modelo.lista_partidos.split("|")
+        return self.lista_electores, self.lista_candidatos, self.lista_partidos
+    
