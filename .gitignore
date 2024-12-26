@@ -3,3 +3,6 @@ __pycache__
 */__pycache__
 */venv
 migrations
+.scannerwork
+sonar-project.properties
+sonar-scanner.properties
