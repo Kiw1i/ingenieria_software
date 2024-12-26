@@ -27,6 +27,7 @@ class Resultados(IResultados):
             self.porcentajes_candidatos = [(votos / self.total_votos) * 100 for votos in self.votos_candidatos]
         else:
             self.porcentajes_candidatos = [0 for _ in self.votos_candidatos]
+        return 
 
     def get_votos_totales(self) -> int:
         """Retorna el total de votos."""
