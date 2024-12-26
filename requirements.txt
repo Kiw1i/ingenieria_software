@@ -5,3 +5,6 @@ mysql-connector-python
 alembic
 pytest
 Flask-SQLAlchemy
+pytest-flask   
+pytest-cov     
+flask-testing  
