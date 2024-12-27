@@ -11,8 +11,7 @@ class RegistroElectoral(IRegistroElectoralRepositorio):
         """Inicializa las listas de electores, candidatos y partidos."""
         self.lista_electores = []  
         self.lista_candidatos = []  
-        self.lista_partidos = []  
-        return 
+        self.lista_partidos = []
     
     def agregar_elector(self, elector) -> None:
         """Agrega un elector a la lista de electores."""
