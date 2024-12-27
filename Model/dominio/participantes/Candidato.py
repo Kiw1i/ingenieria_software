@@ -22,7 +22,7 @@ class candidato(Elector):
     def registrar_candidato(self, elector, candidatura, propuesta):
         self.id = elector.id
         self.correo = elector.correo
-        self.contraseña = elector.contraseña
+        self.contrasena = elector.contrasena
         self.nombre = elector.nombre
         self.apellido = elector.apellido
         self.candidatura = candidatura
