@@ -41,7 +41,6 @@ class elector_repositorio_impl:
                 elector.estado_voto = nuevo_estado_voto
                 db.session.commit()
                 return True
-            return False
         except Exception:
             db.session.rollback()
             return False
