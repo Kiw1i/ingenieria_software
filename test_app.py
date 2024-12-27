@@ -8,7 +8,7 @@ class FlaskAppTestCase(unittest.TestCase):
         """ Configuración inicial antes de cada prueba """
         self.app = create_app()
         self.app.config['TESTING'] = True
-        self.app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'  # Base de datos en memoria para pruebas
+        self.app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:' 
         self.app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
         self.client = self.app.test_client()
         
@@ -26,12 +26,9 @@ class FlaskAppTestCase(unittest.TestCase):
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
 
-        # Decodificar response.data de bytes a str
         response_data = response.data.decode('utf-8')
 
-        # Ahora puedes buscar la cadena 'Iniciar Sesión' dentro de response_data
         self.assertIn('Iniciar Sesión', response_data)
-
 
     def test_register_elector(self):
         """ Prueba el registro de un elector """
@@ -42,7 +39,7 @@ class FlaskAppTestCase(unittest.TestCase):
                 'nombre': 'Test',
                 'apellido': 'User'
             })
-            self.assertEqual(response.status_code, 302)  # Redirección esperada
+            self.assertEqual(response.status_code, 302)  
             elector = ElectorClass.query.filter_by(correo='test@test.com').first()
             self.assertIsNotNone(elector)
             self.assertEqual(elector.nombre, 'Test')
@@ -50,7 +47,6 @@ class FlaskAppTestCase(unittest.TestCase):
     def test_login(self):
         """ Prueba el inicio de sesión """
         with self.app.app_context():
-            # Agrega un elector para la prueba
             elector = ElectorClass(
                 id=None,
                 correo='test@test.com',
@@ -61,12 +57,11 @@ class FlaskAppTestCase(unittest.TestCase):
             db.session.add(elector)
             db.session.commit()
 
-            # Intenta iniciar sesión
             response = self.client.post('/', data={
                 'correo': 'test@test.com',
                 'password': 'password123'
             })
-            self.assertEqual(response.status_code, 302)  # Redirección esperada
+            self.assertEqual(response.status_code, 302) 
             self.assertIn(b'Redirecting', response.data)
 
     def test_eleccion_page(self):

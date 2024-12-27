@@ -2,11 +2,12 @@ from Model.repositorio.MySQL.eleccion_repositorio_impl import EleccionRepositori
 from Model.dominio.participantes.Elector import Elector
 from Model.models.eleccion import EleccionModelo
 
-class candidato(Elector):
+class Candidato(Elector):
     def __init__(self, id, correo, contrasenia, nombre, apellido, candidatura, propuesta):
         super().__init__(id, correo, contrasenia, nombre, apellido)
         self.candidatura = candidatura
         self.propuesta = propuesta
+        return "Candidato creado exitosamente"
 
     def modificar_propuesta(self, propuesta):
         self.propuesta = propuesta
