@@ -3,6 +3,7 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 from unittest.mock import Mock, patch
+from Model.dominio.participantes.Candidato import Candidato
 from Model.dominio.participantes.Elector import Elector
 from Model.models.eleccion import EleccionModelo
 from Model.repositorio.MySQL.eleccion_repositorio_impl import eleccion_repositorio_impl
@@ -14,6 +15,7 @@ def elector():
 
 @pytest.fixture
 def candidato(elector):
+    """Fixture para crear una instancia de Candidato antes de cada prueba."""
     return Candidato(
         id=2,
         correo='candidato@example.com',
@@ -26,6 +28,7 @@ def candidato(elector):
 
 # Test para modificar propuesta
 def test_modificar_propuesta(candidato):
+    """Prueba el método modificar_propuesta."""
     nueva_propuesta = "Mejorar la salud pública"
     resultado = candidato.modificar_propuesta(nueva_propuesta)
     assert candidato.propuesta == nueva_propuesta
@@ -38,6 +41,7 @@ def test_modificar_propuesta_invalida(candidato):
 
 # Test para actualizar perfil
 def test_actualizar_perfil(candidato, elector):
+    """Prueba el método actualizar_perfil."""
     nueva_candidatura = "Vicepresidente"
     nueva_propuesta = "Aumentar el presupuesto de educación"
     resultado = candidato.actualizar_perfil(elector, nueva_candidatura, nueva_propuesta)
