@@ -4,29 +4,27 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // Clonar el repositorio
-                git 'https://github.com/Kiw1i/ingenieria_software.git'  // Reemplaza con la URL de tu repositorio
+                git 'https://github.com/Kiw1i/ingenieria_software.git'  
             }
         }
 
         stage('Setup Environment') {
             steps {
-                // Configurar el entorno virtual e instalar dependencias
                 sh '''
                 python3 -m venv venv
-                source venv/bin/activate
+                . venv/bin/activate  # Asegúrate de activar correctamente el entorno virtual
                 pip install --upgrade pip
                 pip install -r requirements.txt
+                pip install pytest-html  # Instalar pytest-html
                 '''
             }
         }
 
         stage('Run Unit Tests') {
             steps {
-                // Ejecutar pruebas unitarias
                 sh '''
-                source venv/bin/activate
-                pytest test/ --junitxml=results.xml
+                . venv/bin/activate  # Asegúrate de activar el entorno virtual
+                pytest test/ --html=report.html --self-contained-html
                 '''
             }
         }
@@ -34,8 +32,7 @@ pipeline {
 
     post {
         always {
-            // Publicar resultados de pruebas
-            junit 'results.xml'
+            archiveArtifacts allowEmptyArchive: true, artifacts: 'report.html', onlyIfSuccessful: true
         }
     }
 }
