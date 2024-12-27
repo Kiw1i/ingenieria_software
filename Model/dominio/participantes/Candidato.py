@@ -1,4 +1,4 @@
-from Model.repositorio.MySQL.eleccion_repositorio_impl import EleccionRepositorioImpl
+from Model.repositorio.MySQL.eleccion_repositorio_impl import eleccion_repositorio_impl
 from Model.dominio.participantes.Elector import Elector
 from Model.models.eleccion import EleccionModelo
 
