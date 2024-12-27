@@ -59,5 +59,5 @@ alguien escriba esto
 Ilustración gráfica del pipeline en Jenkins:
 ![pipeline](https://github.com/user-attachments/assets/5866094a-c35b-481e-aee1-d0b491e46189)
 
-Reporte de SonarQube:
+Reporte de PyUnit:
 ![sonarqube_report](https://github.com/user-attachments/assets/ecd739f3-eb3b-4403-83f7-5911184538d1)
