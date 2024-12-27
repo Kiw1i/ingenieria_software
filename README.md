@@ -17,6 +17,7 @@ Descripción de las tecnologías usadas en la ejecución del proyecto.
 
 Sistema de elecciones online
 - Lenguaje de programación: Python
+- Framework: Flask
 - Arquitectura: MVC
 - Bibliotecas utilizadas:
   - Flask
@@ -60,4 +61,4 @@ Ilustración gráfica del pipeline en Jenkins:
 ![pipeline](https://github.com/user-attachments/assets/5866094a-c35b-481e-aee1-d0b491e46189)
 
 Reporte de PyUnit:
-![sonarqube_report](https://github.com/user-attachments/assets/ecd739f3-eb3b-4403-83f7-5911184538d1)
+![pyunit_report](https://github.com/user-attachments/assets/ecd739f3-eb3b-4403-83f7-5911184538d1)
