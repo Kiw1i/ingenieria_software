@@ -20,6 +20,8 @@ class candidato(Elector):
         return "Perfil actualizado exitosamente"
 
     def registrar_candidato(self, elector, candidatura, propuesta):
+        if not candidatura or not propuesta:
+            raise ValueError("Datos incompletos para registrar candidato.")
         self.id = elector.id
         self.correo = elector.correo
         self.contrasena = elector.contrasena
