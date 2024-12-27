@@ -20,8 +20,8 @@ class ELECTOR:
       
         if self.correo == correo and self.contrasena == contrasena:
             print("Inicio de sesión exitoso") 
-            return "Inicio de sesión exitoso"
             print(f"Error: correo o contraseña incorrectos para {correo}")
+            return "Inicio de sesión exitoso"
         else:
             return f"Error: correo o contraseña incorrectos para {correo}" 
 
