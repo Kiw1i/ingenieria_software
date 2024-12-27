@@ -1,7 +1,7 @@
 from Model.repositorio.MySQL.elector_repositorio_impl import elector_repositorio_impl
 from Model.models.Elector import Elector
 
-class ELECTOR: 
+class Elector: 
     def __init__(self, id, correo, contrasena, nombre, apellido):
         self.id = id
         self.correo = correo
