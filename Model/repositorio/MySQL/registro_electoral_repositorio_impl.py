@@ -46,4 +46,3 @@ class registro_electoral_repositorio_impl:
             return db.session.query.filter_by(correo=correo).first()
         except Exception as e:
             print(f"Error al obtener elector por correo: {e}")
-            return None
