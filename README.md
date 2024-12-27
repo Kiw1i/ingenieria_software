@@ -54,10 +54,9 @@ Tener un servidor Jenkins configurado y en funcionamiento.
 
 #### 1. *Clonación del repositorio*
    Clona el repositorio de tu proyecto en el servidor o entorno donde ejecutarás el pipeline.
-
-   bash
+```
    git clone  https://github.com/Kiw1i/ingenieria_software/
-   
+   ```
 #### 2. Configuración de Jenkins
 - Instala el plugin de Jenkins necesario para interactuar con Git.
 - Instala plugins para SonarQube, Selenium, Pytest y JUnit.
@@ -66,9 +65,9 @@ Tener un servidor Jenkins configurado y en funcionamiento.
 - Asegúrate de que Jenkins tiene acceso a todas las herramientas necesarias (Selenium, JMeter, ZAP, etc.).
 ### 3. Configuración de SonarQube
 Configura SonarQube con un token de autenticación.
-   bash
-   git clone ingeneria_software sonar-scanner -Dsonar.projectKey=<nombre_del_proyecto> -Dsonar.host.url=url_del_servidor_sonarqube -Dsonar.login=<token>
-
+   ```
+   git clone ingeneria_software sonar-scanner -Dsonar.projectKey= -Dsonar.host.url=url_del_servidor_sonarqube -Dsonar.login=<token>
+```
 ### 4. Configuración de Selenium
 - Configura Selenium WebDriver en el entorno de Jenkins para ejecutar pruebas de funcionalidad.
 - Agrega un paso en Jenkins para ejecutar los tests de Selenium.
@@ -78,9 +77,9 @@ Configura OWASP ZAP en el entorno de Jenkins.
 Agrega un paso en el pipeline para ejecutar el análisis de seguridad usando ZAP en tu sistema.
 ### 6. Configuración de las pruebas unitarias con Pytest
 Configura Jenkins para ejecutar Pytest en el pipeline:
-   bash
+   ```
    pytest test/ --html=report.html --self-contained-html
-
+```
 ## Secuencia lógica del pipeline
 
 1. Se clona el repositorio donde se encuentra el sistema de elecciones online (https://github.com/Kiw1i/ingenieria_software).
