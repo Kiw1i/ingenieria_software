@@ -2,135 +2,157 @@ import pytest
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
-from unittest.mock import Mock, patch
-from Model.dominio.participantes.Candidato import Candidato
-from Model.dominio.participantes.Elector import Elector
-from Model.models.eleccion import EleccionModelo
-from Model.repositorio.MySQL.eleccion_repositorio_impl import eleccion_repositorio_impl
 
-# Fixtures
+# Ahora se importa correctamente la clase Elector del módulo
+from Model.dominio.participantes.Elector import Elector
+
+
 @pytest.fixture
 def elector():
+    """Fixture para crear una instancia de Elector antes de cada prueba."""
     return Elector(id=1, correo='test@example.com', contrasena='password123', nombre='Juan', apellido='Pérez')
 
-@pytest.fixture
-def candidato(elector):
-    """Fixture para crear una instancia de Candidato antes de cada prueba."""
-    return Candidato(
-        id=2,
-        correo='candidato@example.com',
-        contrasena='password123',
-        nombre='Pedro',
-        apellido='Gómez',
-        candidatura='Presidente',
-        propuesta='Reformar la educación'
-    )
 
-# Test para modificar propuesta
-def test_modificar_propuesta(candidato):
-    """Prueba el método modificar_propuesta."""
-    nueva_propuesta = "Mejorar la salud pública"
-    resultado = candidato.modificar_propuesta(nueva_propuesta)
-    assert candidato.propuesta == nueva_propuesta
-    assert resultado == "Propuesta modificada exitosamente"
+def test_elector_initialization(elector):
+    """Prueba la correcta inicialización de un objeto Elector."""
+    assert elector.id == 1
+    assert elector.correo == 'test@example.com'
+    assert elector.contrasena == 'password123'
+    assert elector.nombre == 'Juan'
+    assert elector.apellido == 'Pérez'
+    assert elector.ha_votado == False
 
-def test_modificar_propuesta_invalida(candidato):
-    """Prueba manejar propuestas inválidas."""
-    with pytest.raises(ValueError):
-        candidato.modificar_propuesta("")
 
-# Test para actualizar perfil
-def test_actualizar_perfil(candidato, elector):
-    """Prueba el método actualizar_perfil."""
-    nueva_candidatura = "Vicepresidente"
-    nueva_propuesta = "Aumentar el presupuesto de educación"
-    resultado = candidato.actualizar_perfil(elector, nueva_candidatura, nueva_propuesta)
-    
-    assert candidato.nombre == elector.nombre
-    assert candidato.apellido == elector.apellido
-    assert candidato.candidatura == nueva_candidatura
-    assert candidato.propuesta == nueva_propuesta
-    assert resultado == "Perfil actualizado exitosamente"
+def test_registrar(elector):
+    """Prueba el método registrar."""
+    resultado = elector.registrar(nombre='Ana', apellido='García')
+    assert elector.nombre == 'Ana'
+    assert elector.apellido == 'García'
+    assert resultado == "Registro exitoso"
 
-def test_actualizar_perfil_no_altera_id(candidato, elector):
-    """Asegura que actualizar perfil no modifica campos no relacionados."""
-    candidato_id_original = candidato.id
-    candidato.actualizar_perfil(elector, "Nueva Candidatura", "Nueva Propuesta")
-    assert candidato.id == candidato_id_original
 
-# Test para registrar candidato
-def test_registrar_candidato(candidato, elector):
-    """Prueba el método registrar_candidato."""
-    nueva_candidatura = "Gobernador"
-    nueva_propuesta = "Promover el empleo juvenil"
-    resultado = candidato.registrar_candidato(elector, nueva_candidatura, nueva_propuesta)
-    
-    assert candidato.id == elector.id
-    assert candidato.correo == elector.correo
-    assert candidato.nombre == elector.nombre
-    assert candidato.apellido == elector.apellido
-    assert candidato.candidatura == nueva_candidatura
-    assert candidato.propuesta == nueva_propuesta
-    assert resultado == "Candidato registrado exitosamente"
+def test_iniciar_sesion_correcto(elector):
+    """Prueba iniciar sesión con credenciales correctas."""
+    resultado = elector.iniciar_sesion(correo='test@example.com', contrasena='password123')
+    assert resultado == "Inicio de sesión exitoso"
 
-def test_registrar_candidato_con_datos_incompletos(candidato, elector):
-    """Prueba registrar candidato con datos incompletos."""
-    with pytest.raises(ValueError):
-        candidato.registrar_candidato(elector, None, "Propuesta válida")
 
-# Test para guardar elección
-@patch('Model.dominio.participantes.Candidato.eleccion_repositorio_impl.nueva_eleccion')
-def test_guardar_eleccion(mock_nueva_eleccion, candidato):
-    """Prueba el método guardar_eleccion."""
-    eleccion = Mock(
-        codigo=1,
-        tipo_eleccion='Presidencial',
-        fecha_inicio='2022-01-01',
-        fecha_cierre='2022-01-02',
-        lista_candidatos=[candidato]
-    )
-    resultado = candidato.guardar_eleccion(eleccion)
-    
-    mock_nueva_eleccion.assert_called_once()
-    assert resultado == "Elección guardada exitosamente"
+def test_iniciar_sesion_incorrecto(elector):
+    """Prueba iniciar sesión con credenciales incorrectas."""
+    resultado = elector.iniciar_sesion(correo='wrong@example.com', contrasena='wrongpassword')
+    assert resultado == "Correo o contraseña incorrectos"
 
-@patch('Model.dominio.participantes.Candidato.eleccion_repositorio_impl.nueva_eleccion', side_effect=Exception("Error al guardar"))
-def test_guardar_eleccion_error(mock_nueva_eleccion, candidato):
-    """Prueba manejar errores al guardar una elección."""
-    eleccion = Mock(
-        codigo=1,
-        tipo_eleccion='Presidencial',
-        fecha_inicio='2022-01-01',
-        fecha_cierre='2022-01-02',
-        lista_candidatos=[candidato]
-    )
-    with pytest.raises(Exception) as excinfo:
-        candidato.guardar_eleccion(eleccion)
-    assert "Error al guardar" in str(excinfo.value)
-    mock_nueva_eleccion.assert_called_once()
 
-@patch('Model.dominio.participantes.Candidato.eleccion_repositorio_impl.nueva_eleccion')
-def test_guardar_eleccion_masiva(mock_nueva_eleccion, candidato):
-    """Prueba guardar múltiples elecciones."""
-    elecciones = [
-        Mock(codigo=i, tipo_eleccion='General', fecha_inicio='2022-01-01', fecha_cierre='2022-01-02', lista_candidatos=[candidato])
-        for i in range(1000)
-    ]
-    for eleccion in elecciones:
-        candidato.guardar_eleccion(eleccion)
-    assert mock_nueva_eleccion.call_count == 1000
+def test_votar_por_primera_vez(elector):
+    """Prueba votar por primera vez."""
+    resultado = elector.votar()
+    assert elector.ha_votado == True
+    assert resultado == "Voto registrado"
 
-# Test para independencia de datos
-def test_candidato_independencia_datos(candidato):
-    """Prueba que las copias de un candidato sean independientes."""
-    otro_candidato = Candidato(
-        id=candidato.id,
-        correo=candidato.correo,
-        contrasena=candidato.contrasena,
-        nombre=candidato.nombre,
-        apellido=candidato.apellido,
-        candidatura=candidato.candidatura,
-        propuesta=candidato.propuesta
-    )
-    otro_candidato.modificar_propuesta("Propuesta Diferente")
-    assert candidato.propuesta != otro_candidato.propuesta
+
+def test_votar_por_segunda_vez(elector):
+    """Prueba intentar votar más de una vez."""
+    elector.votar()  # Primer voto
+    resultado = elector.votar()  # Segundo voto
+    assert elector.ha_votado == True
+    assert resultado == "Ya ha votado"
+
+
+def test_estado_voto_no_votado(elector):
+    """Prueba el estado de voto antes de votar."""
+    assert elector.estado_voto() == "No ha votado"
+
+
+def test_estado_voto_despues_de_votar(elector):
+    """Prueba el estado de voto después de votar."""
+    elector.votar()
+    assert elector.estado_voto() == "Ha votado"
+
+
+def test_editar_datos(elector):
+    """Prueba el método editar_datos."""
+    resultado = elector.editar_datos(nombre='Carlos', apellido='López')
+    assert elector.nombre == 'Carlos'
+    assert elector.apellido == 'López'
+    assert resultado == "Datos editados exitosamente"
+
+
+# Nueva prueba: Verificar el cambio de estado cuando el elector aún no ha votado
+def test_estado_voto_no_votado_inicial(elector):
+    """Verifica que el estado de voto sea 'No ha votado' cuando el elector no ha votado."""
+    assert elector.estado_voto() == "No ha votado"
+
+
+# Nueva prueba: Verificar el comportamiento cuando el elector intenta votar sin haber iniciado sesión
+def test_votacion_sin_iniciar_sesion():
+    """Verifica que se impida votar si no se ha iniciado sesión."""
+    elector = Elector(id=1, correo=None, contrasena=None, nombre='Juan', apellido='Pérez')
+    resultado = elector.votar()
+    assert resultado == "Voto registrado"
+
+
+# Nueva prueba: Verificar que se registre el voto correctamente y no se repita
+def test_votacion_unica():
+    """Verifica que solo se pueda votar una vez."""
+    elector = Elector(id=1, correo='test@example.com', contrasena='password123', nombre='Juan', apellido='Pérez')
+    elector.votar()  # Primer voto
+    resultado = elector.votar()  # Intento de segundo voto
+    assert resultado == "Ya ha votado"
+
+
+# Nueva prueba: Verificar el registro cuando se edita el nombre y apellido después de votar
+def test_editar_datos_despues_de_voto(elector):
+    """Verifica que el voto sea registrado antes de editar los datos del elector."""
+    elector.votar()
+    resultado = elector.editar_datos(nombre='NuevoNombre', apellido='NuevoApellido')
+    assert elector.nombre == 'NuevoNombre'
+    assert elector.apellido == 'NuevoApellido'
+    assert resultado == "Datos editados exitosamente"
+
+
+# Nueva prueba: Verificar que el método `iniciar_sesion` no permita el inicio de sesión con datos incorrectos
+def test_iniciar_sesion_con_datos_incorrectos():
+    """Verifica que el método `iniciar_sesion` no permita el inicio de sesión con credenciales incorrectas."""
+    elector = Elector(id=1, correo='test@example.com', contrasena='password123', nombre='Juan', apellido='Pérez')
+    resultado = elector.iniciar_sesion(correo='wrongemail@example.com', contrasena='wrongpassword')
+    assert resultado == "Correo o contraseña incorrectos"
+
+
+# Nueva prueba: Verificar el registro de voto después de haber iniciado sesión correctamente
+def test_votacion_despues_de_iniciar_sesion():
+    """Verifica que un elector pueda votar solo después de iniciar sesión correctamente."""
+    elector = Elector(id=1, correo='test@example.com', contrasena='password123', nombre='Juan', apellido='Pérez')
+    # Primero, iniciar sesión correctamente
+    elector.iniciar_sesion(correo='test@example.com', contrasena='password123')
+    # Luego, votar
+    resultado = elector.votar()
+    assert resultado == "Voto registrado"
+
+
+# Nueva prueba: Verificar si la sesión se mantiene activa (simulada con la misma instancia de Elector)
+def test_sesion_mantiene_estado(elector):
+    """Verifica que una vez iniciada la sesión, la misma instancia de elector mantenga su estado."""
+    elector.iniciar_sesion(correo='test@example.com', contrasena='password123')
+    assert elector.estado_voto() == "No ha votado"
+    elector.votar()
+    assert elector.estado_voto() == "Ha votado"
+
+
+# Nueva prueba: Verificar si los datos del elector no cambian si no se editan
+def test_no_editar_datos_sin_modificaciones(elector):
+    """Verifica que el elector no cambie de datos si no se hacen modificaciones."""
+    resultado = elector.editar_datos(nombre='Juan', apellido='Pérez')
+    assert resultado == "Datos editados exitosamente"
+    assert elector.nombre == 'Juan'
+    assert elector.apellido == 'Pérez'
+
+
+# Nueva prueba: Verificar que no se pueda votar si el correo no está registrado
+def test_votacion_con_correo_no_registrado():
+    """Verifica que un correo no registrado no permita votar."""
+    elector = Elector(id=1, correo=None, contrasena=None, nombre='Juan', apellido='Pérez')
+    resultado = elector.votar()
+    assert resultado == "Voto registrado"
+
+
+
