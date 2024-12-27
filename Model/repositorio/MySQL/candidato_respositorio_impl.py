@@ -37,7 +37,6 @@ class candidato_respositorio_impl:
                 candidato.propuesta = nueva_propuesta
                 db.session.commit()
                 return True
-            return False
         except Exception:
             db.session.rollback()
             return False
