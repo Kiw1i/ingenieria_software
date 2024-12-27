@@ -43,7 +43,43 @@ Sistema de elecciones online
 
 ## Instalación y configuración
 
-alguien escriba esto
+Configuración correcta del pipeline de CI/CD para este proyecto.
+
+### Requisitos previos:
+Tener un servidor Jenkins configurado y en funcionamiento.
+- Git debe estar instalado y configurado en el entorno de desarrollo.
+- SonarQube debe estar instalado y configurado para analizar el código.
+- Selenium debe estar configurado para la ejecución de pruebas de funcionalidad.
+- OWASP ZAP debe estar disponible para el análisis de seguridad.
+
+#### 1. *Clonación del repositorio*
+   Clona el repositorio de tu proyecto en el servidor o entorno donde ejecutarás el pipeline.
+
+   bash
+   git clone  https://github.com/Kiw1i/ingenieria_software/
+   
+#### 2. Configuración de Jenkins
+- Instala el plugin de Jenkins necesario para interactuar con Git.
+- Instala plugins para SonarQube, Selenium, Pytest y JUnit.
+- Crea un nuevo Job en Jenkins para este proyecto.
+- Configura el Job para que se ejecute automáticamente cuando se realicen cambios en el repositorio Git.
+- Asegúrate de que Jenkins tiene acceso a todas las herramientas necesarias (Selenium, JMeter, ZAP, etc.).
+### 3. Configuración de SonarQube
+Configura SonarQube con un token de autenticación.
+   bash
+   git clone ingeneria_software sonar-scanner -Dsonar.projectKey=<nombre_del_proyecto> -Dsonar.host.url=url_del_servidor_sonarqube -Dsonar.login=<token>
+
+### 4. Configuración de Selenium
+- Configura Selenium WebDriver en el entorno de Jenkins para ejecutar pruebas de funcionalidad.
+- Agrega un paso en Jenkins para ejecutar los tests de Selenium.
+
+### 5. Configuración de ZAP para Análisis de Seguridad
+Configura OWASP ZAP en el entorno de Jenkins.
+Agrega un paso en el pipeline para ejecutar el análisis de seguridad usando ZAP en tu sistema.
+### 6. Configuración de las pruebas unitarias con Pytest
+Configura Jenkins para ejecutar Pytest en el pipeline:
+   bash
+   pytest test/ --html=report.html --self-contained-html
 
 ## Secuencia lógica del pipeline
 
