@@ -50,4 +50,14 @@ alguien escriba esto
 2. Se configura el entorno virtual y se instalan las dependencias necesarias.
 3. Se ejecutan las pruebas unitarias
   - Pruebas para la clase Elector
-4. Se hace
+4. Se realiza el análisis estático del código fuente con SonarQube
+5. Se realiza el análisis de seguridad con ZAP
+6. Se almacenan los reportes de resultados.
+
+## Reportes de ejecución
+
+Ilustración gráfica del pipeline en Jenkins:
+![pipeline](https://github.com/user-attachments/assets/5866094a-c35b-481e-aee1-d0b491e46189)
+
+Reporte de SonarQube:
+![sonarqube_report](https://github.com/user-attachments/assets/ecd739f3-eb3b-4403-83f7-5911184538d1)
